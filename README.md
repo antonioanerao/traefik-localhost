@@ -11,6 +11,16 @@
 - Execute o whoami para testar a rede
 
       $ docker run -d --name test --network proxy containous/whoami
+      
+### Usando Traefik com outro projeto docker-compose
+- Adicionar os Labels dentro do servico
+
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=proxy"
+        - "traefik.http.routers.retina.rule=Host(`retina.docker.localhost`)"
+        - "traefik.http.routers.retina.entrypoints=web"
+ 
            
 ### Links
 - Dashboard Traefik: http://localhost:8080

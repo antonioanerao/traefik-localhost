@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: traefik:v2.4
+    container_name: traefik
+    restart: always
+    ports:
+      - 8080:8080
+      - 80:80
+    volumes:
+      - $PWD/config/traefik.yml:/etc/traefik/traefik.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

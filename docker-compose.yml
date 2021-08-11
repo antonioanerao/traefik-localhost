@@ -1,19 +1,26 @@
 version: "3.7"
 
 services:
+
   traefik:
-    image: traefik:v2.4
-    container_name: traefik
-    restart: always
+    image: "traefik:v2.4"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     ports:
-      - 8080:8080
-      - 80:80
+      - "80:80"
+      - "8080:8080"
+      - "1433:1433"
     volumes:
-      - $PWD/config/traefik.yml:/etc/traefik/traefik.yml
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - proxy
 
 networks:
   proxy:
     external: true
+

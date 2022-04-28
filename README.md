@@ -18,9 +18,15 @@
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=proxy"
-        - "traefik.http.routers.retina.rule=Host(`retina.docker.localhost`)"
-        - "traefik.http.routers.retina.entrypoints=web"
+        - "traefik.http.routers.retina.rule=Host(`nome-container.docker.localhost`)"
+        - "traefik.http.routers.nome-container.entrypoints=web"
+
+- Adicionar a rede proxy na área networks do seu serviço
+- Declarar que a rede proxy será externa. Exemplo:
  
+      networks:
+        proxy:
+          external: true 
            
 ### Links
 - Dashboard Traefik: http://localhost:8080
